@@ -22,7 +22,7 @@ tbody tr {
   background: #fff;
   -webkit-box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
   box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
-  height: 50px;
+  height: 20px;
 
   /* Center align content vertically */
   td > * {
