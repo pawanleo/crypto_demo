@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import CryptoDataDisplay from "./components/Crypto/CrytpoDataDisplay";
+import Image from "next/image";
+import CryptoDataList from "./components/Crypto/CryptoDataList";
 
 
 
-export default function IndexPage() {
-  return <CryptoDataDisplay/>;
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+   <CryptoDataList/>
+    </main>
+  );
 }
-
-export const metadata: Metadata = {
-  title: "Crypto Project",
-};

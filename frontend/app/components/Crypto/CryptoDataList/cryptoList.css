@@ -1,0 +1,99 @@
+.crypto-table {
+  border-collapse: separate;
+  border-spacing: 0 1em;
+  padding: 10px;
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
+}
+
+table {
+  width: 100%;
+}
+
+thead th {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+tbody {
+  max-height: 400px; /* Example maximum height for the tbody */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+tbody tr {
+  background: #fff;
+  -webkit-box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
+  box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07);
+  height: 50px;
+
+  /* Center align content vertically */
+  td > * {
+    vertical-align: middle;
+  }
+
+  /* Rounded corners for first and last cells */
+  td:first-child {
+    border-radius: 10px 0 0 10px;
+  }
+  td:last-child {
+    border-radius: 0 10px 10px 0;
+  }
+
+  /* Styling for images within table cells */
+  td img {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Additional styles for cards with gradient backgrounds */
+.card.crypto-gradient-card {
+  color: #fff;
+  border: 0;
+}
+
+.gradient-1 {
+  /* Gradient background with shadow */
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #eb3349; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #f45c43,
+    #eb3349
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #f45c43,
+    #eb3349
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gradient-2 {
+  /* Gradient background with shadow */
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #1cd8d2; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #93edc7,
+    #1cd8d2
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #93edc7,
+    #1cd8d2
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.gradient-3 {
+  /* Gradient background with shadow */
+  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: #00d2ff; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3a7bd5,
+    #00d2ff
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3a7bd5,
+    #00d2ff
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}

@@ -1,26 +1,29 @@
-import { setSelectedCrypto } from '@/lib/features/counter/cryptoSlice'
-import { useAppDispatch } from '@/lib/hooks'
-import React, { useState } from 'react'
-
-
+'use client';
+import { setSelectedCrypto } from '@/lib/features/cryptoSlice';
+import { useAppDispatch } from '@/lib/hooks';
+import React, { useState } from 'react';
 
 const ChangeCryptoModal = () => {
-  const [newCrypto, setNewCrypto] = useState('')
-  const [isOpen, setIsOpen] = useState(false)
-  const dispatch = useAppDispatch()
+  const [newCrypto, setNewCrypto] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (newCrypto) {
-      dispatch(setSelectedCrypto(newCrypto.toUpperCase()))
-      setNewCrypto('')
-      setIsOpen(false)
+      dispatch(setSelectedCrypto(newCrypto.toUpperCase()));
+      setNewCrypto('');
+      setIsOpen(false);
     }
-  }
+  };
+
+  const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setNewCrypto(e.target.value);
+  };
 
   return (
     <div>
-      <button 
+      <button
         onClick={() => setIsOpen(true)}
         className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
@@ -32,13 +35,20 @@ const ChangeCryptoModal = () => {
           <div className="bg-white p-6 rounded-lg">
             <h2 className="text-xl font-bold mb-4">Change Crypto</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
+              <select
                 value={newCrypto}
-                onChange={(e) => setNewCrypto(e.target.value)}
-                placeholder="Enter crypto symbol (e.g., BTC)"
+                onChange={handleSelectChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded"
-              />
+              >
+                <option value="">Select a cryptocurrency</option>
+                <option value="BTC">Bitcoin</option>
+                <option value="ETH">Ethereum</option>
+                <option value="USDT">Tether</option>
+                <option value="SOL">Solana</option>
+                <option value="BNB">BNB</option>
+      
+                {/* Add more options as needed */}
+              </select>
               <div className="flex justify-end space-x-2">
                 <button
                   type="button"
@@ -59,7 +69,7 @@ const ChangeCryptoModal = () => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default ChangeCryptoModal
+export default ChangeCryptoModal;

@@ -1,33 +1,42 @@
-import type { Action, ThunkAction } from "@reduxjs/toolkit";
-import { combineSlices, configureStore } from "@reduxjs/toolkit";
-import {cryptoSlice} from "./features/counter/cryptoSlice";
+import { configureStore } from '@reduxjs/toolkit'
+import { persistReducer, persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { combineReducers } from 'redux'
+import cryptoSlice from './features/cryptoSlice'
 
-// `combineSlices` automatically combines the reducers using
-// their `reducerPath`s, therefore we no longer need to call `combineReducers`.
-const rootReducer = combineSlices( cryptoSlice);
-// Infer the `RootState` type from the root reducer
-export type RootState = ReturnType<typeof rootReducer>;
+const persistConfig = {
+  key: 'root',
+  version: 1,
+  storage,
+  // If you want to persist only specific reducers, use a whitelist:
+  // whitelist: ['crypto']
+}
 
-// `makeStore` encapsulates the store configuration to allow
-// creating unique store instances, which is particularly important for
-// server-side rendering (SSR) scenarios. In SSR, separate store instances
-// are needed for each request to prevent cross-request state pollution.
+const rootReducer = combineReducers({
+  crypto: cryptoSlice
+})
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 export const makeStore = () => {
-  return configureStore({
-    reducer: rootReducer,
-    middleware: (getDefaultMiddleware) => {
-      return getDefaultMiddleware();
-    },
-  });
-};
+  const store = configureStore({
+    reducer: persistedReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
+  })
+  
+  return store
+}
 
-// Infer the return type of `makeStore`
-export type AppStore = ReturnType<typeof makeStore>;
-// Infer the `AppDispatch` type from the store itself
-export type AppDispatch = AppStore["dispatch"];
-export type AppThunk<ThunkReturnType = void> = ThunkAction<
-  ThunkReturnType,
-  RootState,
-  unknown,
-  Action
->;
+export const store = makeStore()
+export const persistor = persistStore(store)
+
+// Infer the type of makeStore
+export type AppStore = ReturnType<typeof makeStore>
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<AppStore['getState']>
+export type AppDispatch = AppStore['dispatch']
